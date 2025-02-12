@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+// import Typography from '@mui/material/Typography';
 import { createTheme } from '@mui/material/styles';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
@@ -15,6 +15,17 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
+import HomeScreen from './dashboard/screens/HomeScreen';
+import DashboardScreen from './dashboard/screens/DashboardScreen';
+import CustomersScreen from './dashboard/screens/CustomersScreen';
+import OrdersSecreen from './dashboard/screens/OrdersSecreen';
+import AnalyticsScreen from './dashboard/screens/AnalyticsScreen';
+import MessagesScreen from './dashboard/screens/MessagesScreen';
+import ProductsScreen from './dashboard/screens/ProductsScreen';
+import ReportsScreen from './dashboard/screens/ReportsScreen';
+import AddProductScreen from './dashboard/screens/AddProductScreen';
+import SettingsScreen from './dashboard/screens/SettingsScreen';
+import LogOutScreen from './dashboard/screens/LogOutScreen';
 const NAVIGATION: Navigation = [
   {
     kind: 'header',
@@ -79,6 +90,11 @@ const NAVIGATION: Navigation = [
   }
 ];
 
+
+/*
+0)>>> =()= <<<(0
+*/
+
 const demoTheme = createTheme({
   cssVariables: {
     colorSchemeSelector: 'data-toolpad-color-scheme',
@@ -96,7 +112,7 @@ const demoTheme = createTheme({
 });
 
 function DemoPageContent({ pathname }: { pathname: string }) {
-  return (
+  return (  
     <Box
       sx={{
         py: 4,
@@ -106,7 +122,18 @@ function DemoPageContent({ pathname }: { pathname: string }) {
         textAlign: 'center',
       }}
     >
-      <Typography>Dashboard content for {pathname}</Typography>
+      { pathname === "/" ? <HomeScreen /> : 
+        pathname === "/dashboard" ? <DashboardScreen /> :
+        pathname === "/customers" ? <CustomersScreen /> :
+        pathname === "/orders" ? <OrdersSecreen /> :
+        pathname === "/analytics" ? <AnalyticsScreen /> :
+        pathname === "/messages" ? <MessagesScreen /> :
+        pathname === "/products" ? <ProductsScreen /> :
+        pathname === "/reports" ? <ReportsScreen /> :
+        pathname === "/add%20product" ? <AddProductScreen /> :
+        pathname === "/settings" ? <SettingsScreen /> :
+        pathname === "/log%20out" ? <LogOutScreen /> : ""
+      }
     </Box>
   );
 }
@@ -114,7 +141,6 @@ function DemoPageContent({ pathname }: { pathname: string }) {
 interface DemoProps {
   /**
    * Injected by the documentation to work in an iframe.
-   * Remove this when copying and pasting into your project.
    */
   window?: () => Window;
 }
@@ -122,13 +148,11 @@ interface DemoProps {
 export default function DashboardLayoutBasic(props: DemoProps) {
   const { window } = props;
 
-  const router = useDemoRouter('/dashboard');
+  const router = useDemoRouter('/');
 
-  // Remove this const when copying and pasting into your project.
   const demoWindow = window !== undefined ? window() : undefined;
 
   return (
-    // preview-start
     <AppProvider
       navigation={NAVIGATION}
       router={router}
@@ -144,6 +168,5 @@ export default function DashboardLayoutBasic(props: DemoProps) {
         <DemoPageContent pathname={router.pathname} />
       </DashboardLayout>
     </AppProvider>
-    // preview-end
   );
 }
